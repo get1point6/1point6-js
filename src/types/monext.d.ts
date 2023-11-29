@@ -1,0 +1,1 @@
+export type MonextWidget = unknown;
