@@ -1,8 +1,18 @@
 {
-  "name": "@panto/pantojs_loader",
-  "private": true,
+  "name": "@panto/panto-js",
   "version": "1.0.0",
+  "description": "Panto.js loading wrapper",
+  "repository": "github:getpanto/panto-js",
   "type": "module",
+  "types": "types/index.d.ts",
+  "typings": "types/index.d.ts",
+  "keywords": [
+    "panto",
+    "pantojs",
+    "panto.js",
+    "panto.js loading wrapper"
+  ],
+  "author": "Panto (https://getpanto.io/)",
   "main": "dist/panto.es.js",
   "scripts": {
     "start:dev": "nodemon --watch /src --exec 'tsc && vite build'",
