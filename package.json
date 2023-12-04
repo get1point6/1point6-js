@@ -2,7 +2,10 @@
   "name": "@panto/panto-js",
   "version": "1.0.0",
   "description": "Panto.js loading wrapper",
-  "repository": "github:getpanto/panto-js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/getpanto/panto-js.git"
+  },
   "type": "module",
   "types": "types/index.d.ts",
   "typings": "types/index.d.ts",
@@ -23,5 +26,10 @@
     "nodemon": "^3.0.1",
     "typescript": "^5.0.2",
     "vite": "^4.3.9"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/getpanto/panto-js/issues"
+  },
+  "homepage": "https://github.com/getpanto/panto-js#readme",
+  "license": "MIT"
 }
