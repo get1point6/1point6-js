@@ -77,7 +77,14 @@ export interface PantoConstructor {
      * Your publishable key.
      */
     publishableKey: string,
-
+    /**
+     * Targetted environment.
+     */
+    env?: "local" | "dev" | "sandbox" | "production",
+    /**
+     * On sandbox mode, your sandbox instance.
+     */
+    sandboxInstance?: string,
     /**
      * Initialization options.
      */

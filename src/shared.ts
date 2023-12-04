@@ -9,6 +9,8 @@ export type LoadPanto = (
 ) => Promise<Panto | null>;
 
 export interface LoadParams {
+  env: "local" | "dev" | "sandbox" | "production";
+  sandboxInstance: string | undefined;
   advancedFraudSignals: boolean;
 }
 
@@ -21,9 +23,7 @@ const EXISTING_SCRIPT_MESSAGE =
   "loadPanto.setLoadParameters was called but an existing Panto.js script already exists in the document; existing script parameters will be used";
 
 export const findScript = (): HTMLScriptElement | null => {
-  const scripts = document.querySelectorAll<HTMLScriptElement>(
-    `script[src^="${PANTO_URL}"]`
-  );
+  const scripts = document.querySelectorAll<HTMLScriptElement>(`script`);
   for (let i = 0; i < scripts.length; i++) {
     const script = scripts[i];
     if (!PANTO_URL_REGEX.test(script.src)) {
@@ -109,8 +109,28 @@ export const initPanto = (
 
 const injectScript = (params: null | LoadParams): HTMLScriptElement => {
   const queryString = params;
+
   const script = document.createElement("script");
-  script.src = `${PANTO_URL}${queryString ? queryString : ""}`;
+  let scriptSrc = PANTO_URL;
+
+  switch (params?.env) {
+    case "local":
+      scriptSrc = "http://localhost:3004/";
+      break;
+    case "dev":
+      scriptSrc = "https://js.develop.getpanto.ovh/";
+      break;
+    case "sandbox":
+      scriptSrc = `https://${params.sandboxInstance}.getpanto.ovh/`;
+      break;
+    case "prod":
+      scriptSrc = "https://js.getpanto.io/";
+      break;
+    default:
+      break;
+  }
+
+  script.src = `${scriptSrc}${queryString ? queryString : ""}`;
   console;
   const headOrBody = document.head || document.body;
 

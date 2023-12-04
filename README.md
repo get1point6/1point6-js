@@ -29,10 +29,16 @@ This function returns a promise that resolves with a newly created Panto object 
 ```jsx
 import { loadPanto } from "@panto/panto-js";
 
-const panto = await loadPanto("public_0b38ef2f95c09ad0aa08");
+const panto = await loadPanto({
+  publicApiKey: "public_0b38ef2f95c09ad0aa08",
+  env: "sandbox",
+  sandboxInstance: "my-sandbox-instance",
+});
 ```
 
-We have placed a random API key in this example. Replace it with your actual publishable API keys to test this code via your Panto account.
+- **publicApiKey**: We have placed a random API key in this example. Replace it with your actual publishable API keys to test this code via your Panto account. You can find your API keys in your Panto Dashboard.
+- **env**: The environment in which to load Panto.js. Can be sandbox or production.
+- **sandboxInstance**: The name of your sandbox instance. Only required if you are using the sandbox environment.
 
 ### Manual Installation
 
