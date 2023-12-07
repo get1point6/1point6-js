@@ -9,9 +9,8 @@ export type LoadPanto = (
 ) => Promise<Panto | null>;
 
 export interface LoadParams {
-  env: "local" | "dev" | "sandbox" | "production";
-  sandboxInstance: string | undefined;
-  advancedFraudSignals: boolean;
+  env?: "local" | "dev" | "sandbox" | "production";
+  sandboxInstance?: string | undefined;
 }
 
 const PANTO_URL_REGEX =
@@ -101,18 +100,14 @@ export const initPanto = (
   if (maybePanto === null) {
     return null;
   }
-
   const panto = maybePanto.apply(undefined, args);
   registerWrapper(panto, startTime);
   return panto;
 };
 
 const injectScript = (params: null | LoadParams): HTMLScriptElement => {
-  const queryString = params;
-
   const script = document.createElement("script");
   let scriptSrc = PANTO_URL;
-
   switch (params?.env) {
     case "local":
       scriptSrc = "http://localhost:3004/";
@@ -123,14 +118,14 @@ const injectScript = (params: null | LoadParams): HTMLScriptElement => {
     case "sandbox":
       scriptSrc = `https://${params.sandboxInstance}.getpanto.ovh/`;
       break;
-    case "prod":
+    case "production":
       scriptSrc = "https://js.getpanto.io/";
       break;
     default:
       break;
   }
 
-  script.src = `${scriptSrc}${queryString ? queryString : ""}`;
+  script.src = `${scriptSrc}`;
   console;
   const headOrBody = document.head || document.body;
 
