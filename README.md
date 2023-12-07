@@ -29,10 +29,10 @@ This function returns a promise that resolves with a newly created Panto object 
 ```jsx
 import { loadPanto } from "@panto/panto-js";
 
-const panto = await loadPanto({
-  publicApiKey: "public_0b38ef2f95c09ad0aa08",
-  env: "sandbox",
-  sandboxInstance: "my-sandbox-instance",
+const panto = await loadPanto(
+  publicApiKey, // "public_0b38ef2f95c09ad0aa08"
+  'sandbox', // "sandbox" or "production"
+  'my-sandbox-instance', // Only required if you are using the sandbox environment
 });
 ```
 
