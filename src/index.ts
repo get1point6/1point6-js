@@ -12,7 +12,7 @@ export const loadPanto: LoadPanto = (...args) => {
       console.warn(err);
     }
   });
-  loadScriptArgs = { env: args[1], sandboxInstance: args[2] };
+  loadScriptArgs = { env: args[1] };
   loadCalled = true;
   const startTime = Date.now();
   return pantoPromise.then((maybePanto) =>

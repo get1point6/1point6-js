@@ -80,11 +80,7 @@ export interface PantoConstructor {
     /**
      * Targetted environment.
      */
-    env?: "local" | "dev" | "sandbox" | "production",
-    /**
-     * On sandbox mode, your sandbox instance.
-     */
-    sandboxInstance?: string,
+    env?: "local" | "development" | "sandbox" | "production",
     /**
      * Initialization options.
      */

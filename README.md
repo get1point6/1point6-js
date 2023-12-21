@@ -38,7 +38,6 @@ const panto = await loadPanto(
 
 - **publicApiKey**: We have placed a random API key in this example. Replace it with your actual publishable API keys to test this code via your Panto account. You can find your API keys in your Panto Dashboard.
 - **env**: The environment in which to load Panto.js. Can be sandbox or production.
-- **sandboxInstance**: The name of your sandbox instance. Only required if you are using the sandbox environment.
 
 ### Manual Installation
 
