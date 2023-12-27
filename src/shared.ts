@@ -9,7 +9,7 @@ export type LoadPanto = (
 ) => Promise<Panto | null>;
 
 export interface LoadParams {
-  env?: "local" | "development" | "sandbox" | "production";
+  env?: "local" | "staging" | "sandbox" | "production" | "development";
 }
 
 const PANTO_URL_REGEX =
@@ -111,16 +111,16 @@ const injectScript = (params: null | LoadParams): HTMLScriptElement => {
     case "local":
       scriptSrc = "http://localhost:3004/";
       break;
-    case "development":
-      scriptSrc = "https://js.develop.getpanto.ovh/";
-      break;
     case "sandbox":
       scriptSrc = `https://js.getpanto.site/`;
       break;
     case "production":
       scriptSrc = "https://js.getpanto.io/";
       break;
+    case "staging":
+    case "development":
     default:
+      scriptSrc = "https://js.getpanto.xyz/";
       break;
   }
 
