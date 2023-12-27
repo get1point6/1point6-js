@@ -112,7 +112,7 @@ const injectScript = (params: null | LoadParams): HTMLScriptElement => {
       scriptSrc = "http://localhost:3004/";
       break;
     case "development":
-      scriptSrc = "https://js.develop.getpanto.ovh/";
+      scriptSrc = "https://js.getpanto.xyz/";
       break;
     case "sandbox":
       scriptSrc = `https://js.getpanto.site/`;
