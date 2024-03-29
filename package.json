@@ -4,11 +4,11 @@
   "description": "1point6.js loading wrapper",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/getpanto/panto-js.git"
+    "url": "git+https://github.com/get1point6/1point6-js.git"
   },
   "type": "module",
-  "types": "types/index.d.ts",
-  "typings": "types/index.d.ts",
+  "types": "dist/index.d.ts",
+  "typings": "dist/index.d.ts",
   "keywords": [
     "1point6",
     "1point6js",
@@ -25,11 +25,12 @@
     "@types/node": "^20.8.5",
     "nodemon": "^3.0.1",
     "typescript": "^5.0.2",
-    "vite": "^4.3.9"
+    "vite": "^4.3.9",
+    "vite-plugin-dts": "^3.8.1"
   },
   "bugs": {
-    "url": "https://github.com/getpanto/panto-js/issues"
+    "url": "https://github.com/get1point6/1point6-js/issues"
   },
-  "homepage": "https://github.com/getpanto/panto-js#readme",
+  "homepage": "https://github.com/get1point6/1point6-js#readme",
   "license": "MIT"
 }

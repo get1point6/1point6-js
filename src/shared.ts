@@ -1,20 +1,20 @@
-import { Get1Point6, Get1Point6Constructor } from "./types/1point6-js/1point6";
+import { Get1Point6, Constructor } from "./types/1point6-js/1point6";
 
 interface CustomWindow extends Window {
-  Get1Point6: Get1Point6Constructor;
+  Get1Point6: Constructor;
 }
 
 export type Load1Point6 = (
-  ...args: Parameters<Get1Point6Constructor>
+  ...args: Parameters<Constructor>
 ) => Promise<Get1Point6 | null>;
 
 export interface LoadParams {
   env?: "local" | "staging" | "sandbox" | "production" | "development";
 }
 
-const PANTO_URL_REGEX =
-  /^(https:\/\/([a-zA-Z0-9-]+\.)*js\.getpanto\.(io|ovh|xyz)|http:\/\/localhost:3004)$/;
-const PANTO_URL = "https://js.getpanto.io";
+const GET1POINT6_URL_REGEX =
+  /^(https:\/\/([a-zA-Z0-9-]+\.)*js\.get1point6\.(io|ovh|xyz|com)|http:\/\/localhost:3004)$/;
+const GET1POINT6_URL = "https://js.get1point6.com";
 declare const _VERSION: string;
 
 const EXISTING_SCRIPT_MESSAGE =
@@ -24,7 +24,7 @@ export const findScript = (): HTMLScriptElement | null => {
   const scripts = document.querySelectorAll<HTMLScriptElement>(`script`);
   for (let i = 0; i < scripts.length; i++) {
     const script = scripts[i];
-    if (!PANTO_URL_REGEX.test(script.src)) {
+    if (!GET1POINT6_URL_REGEX.test(script.src)) {
       continue;
     }
 
@@ -34,11 +34,11 @@ export const findScript = (): HTMLScriptElement | null => {
   return null;
 };
 
-let promise: Promise<Get1Point6Constructor | null> | null = null;
+let promise: Promise<Constructor | null> | null = null;
 
 export const loadScript = (
   params: null | LoadParams
-): Promise<Get1Point6Constructor | null> => {
+): Promise<Constructor | null> => {
   // Ensure that we only attempt to load 1point6.js at most once
   if (promise !== null) {
     return promise;
@@ -92,21 +92,21 @@ export const loadScript = (
 };
 
 export const init1Point6 = (
-  maybe1Point6: Get1Point6Constructor | null,
-  args: Parameters<Get1Point6Constructor>,
+  maybe1Point6: Constructor | null,
+  args: Parameters<Constructor>,
   startTime: number
 ): Get1Point6 | null => {
   if (maybe1Point6 === null) {
     return null;
   }
-  const _1Point6 = maybe1Point6.apply(undefined, args);
-  registerWrapper(_1Point6, startTime);
-  return _1Point6;
+  const get1Point6 = maybe1Point6.apply(undefined, args);
+  registerWrapper(get1Point6, startTime);
+  return get1Point6;
 };
 
 const injectScript = (params: null | LoadParams): HTMLScriptElement => {
   const script = document.createElement("script");
-  let scriptSrc = PANTO_URL;
+  let scriptSrc = GET1POINT6_URL;
   switch (params?.env) {
     case "local":
       scriptSrc = "http://localhost:3004/";
@@ -118,7 +118,7 @@ const injectScript = (params: null | LoadParams): HTMLScriptElement => {
       scriptSrc = `https://js.getpanto.site/`;
       break;
     case "production":
-      scriptSrc = "https://js.getpanto.io/";
+      scriptSrc = "https://js.get1point6.com/";
       break;
     case "staging":
     default:
@@ -141,10 +141,10 @@ const injectScript = (params: null | LoadParams): HTMLScriptElement => {
   return script;
 };
 
-const registerWrapper = (_1Point6: any, startTime: number): void => {
-  if (!_1Point6 || !_1Point6._registerWrapper) {
+const registerWrapper = (get1Point6: any, startTime: number): void => {
+  if (!get1Point6 || !get1Point6._registerWrapper) {
     return;
   }
 
-  _1Point6._registerWrapper({ name: "1Point6-js", version: _VERSION, startTime });
+  get1Point6._registerWrapper({ name: "1Point6-js", version: _VERSION, startTime });
 };

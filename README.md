@@ -29,7 +29,7 @@ This function returns a promise that resolves with a newly created 1Point6 objec
 ```jsx
 import { load1Point6 } from "@1point6/1point6-js";
 
-const _1Point6 = await load1Point6(
+const get1Point6 = await load1Point6(
   publicApiKey, // "public_0b38ef2f95c09ad0aa08"
   'sandbox', // "sandbox" or "production"
   'my-sandbox-instance', // Only required if you are using the sandbox environment
@@ -45,12 +45,12 @@ Manually add the 1Point6.js script tag to the <head> of each page on your site. 
 
 ```jsx
 <!-- Somewhere in your site's <head> -->
-<script src="https://js.getpanto.io/" async></script>
+<script src="https://js.get1point6.com/" async></script>
 ```
 
 ## 1) Creating a paymentIntent (Backend)
 
-On the server side, proceed to create a paymentIntent on the route https://api.getpanto.io/payment-intents
+On the server side, proceed to create a paymentIntent on the route https://api.get1point6.com/payment-intents
 
 Example in PHP:
 
@@ -82,7 +82,7 @@ function createPaymentIntent($items) {
         ],
     ];
 
-    $ch = curl_init("https://api.getpanto.io/payment_intents");
+    $ch = curl_init("https://api.get1point6.com/payment_intents");
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($paymentIntentBody));

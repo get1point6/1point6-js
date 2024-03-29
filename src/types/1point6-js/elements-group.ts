@@ -1,12 +1,11 @@
 import {
-  Get1Point6PaymentElement,
-  Get1Point6PaymentElementOptions,
-  Get1Point6AddressElement,
-  Get1Point6AddressElementOptions,
+  PaymentElement,
+  PaymentElementOptions,
+  AddressElement,
+  AddressElementOptions,
 } from "./elements";
 
-import { Get1Point6Error } from "./1point6";
-export interface Get1Point6Elements {
+export interface Elements {
   /////////////////////////////
   /// payment
   /////////////////////////////
@@ -18,13 +17,13 @@ export interface Get1Point6Elements {
    */
   create(
     elementType: "payment",
-    options?: Get1Point6PaymentElementOptions
-  ): Promise<Get1Point6PaymentElement>;
+    options?: PaymentElementOptions
+  ): Promise<PaymentElement>;
 
   /**
    * Looks up a previously created `Element` by its type.
    */
-  // getElement(elementType: "payment"): Get1Point6PaymentElement | null;
+  // getElement(elementType: "payment"): PaymentElement | null;
 
   /////////////////////////////
   /// address
@@ -35,17 +34,17 @@ export interface Get1Point6Elements {
    */
   create(
     elementType: "address",
-    options: Get1Point6AddressElementOptions
-  ): Promise<Get1Point6AddressElement>;
+    options: AddressElementOptions
+  ): Promise<AddressElement>;
 
   /**
    * Looks up a previously created `Element` by its type.
    */
-  // getElement(elementType: "address"): Get1Point6AddressElement | null;
+  // getElement(elementType: "address"): AddressElement | null;
 }
 
-export interface Get1Point6ElementsOptionsClientSecret
-  extends BaseGet1Point6ElementsOptions {
+export interface ElementsOptionsClientSecret
+  extends BaseElementsOptions {
   /**
    * The client secret for a PaymentIntent or SetupIntent used by the Payment Element.
    *
@@ -59,7 +58,7 @@ export interface Get1Point6ElementsOptionsClientSecret
   mode?: never;
 }
 
-export type Get1Point6ElementLocale =
+export type ElementLocale =
   | "auto"
   | "ar"
   | "bg"
@@ -114,18 +113,18 @@ export type Get1Point6ElementLocale =
 /**
  * Options to create an `Elements` instance with.
  */
-export interface BaseGet1Point6ElementsOptions {
+export interface BaseElementsOptions {
   /**
    * An array of custom fonts, which elements created from the `Elements` object can use.
    */
-  fonts?: Array<CssFontSource | CustomFontSource>;
+  fonts?: Array<any>;
 
   /**
    * The [IETF language tag](https://en.wikipedia.org/wiki/IETF_language_tag) of the locale to display placeholders and error strings in.
-   * Default is `auto` (Get1Point6 detects the locale of the browser).
+   * Default is `auto` (1point6-js detects the locale of the browser).
    * Setting the locale does not affect the behavior of postal code validation—a valid postal code for the billing country of the card is still required.
    */
-  locale?: Get1Point6ElementLocale;
+  locale?: ElementLocale;
   /**
    * Match the Payment Element with the design of your site with the appearance option.
    * The layout of the Payment Element stays consistent, but you can modify colors, fonts, borders, padding, and more.

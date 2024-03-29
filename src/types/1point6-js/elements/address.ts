@@ -1,18 +1,17 @@
-import { Get1Point6ElementBase } from "./base";
-import { Get1Point6Error } from "../1point6";
+import { ElementBase } from "./base";
 
-export type Get1Point6AddressElement = Get1Point6ElementBase & {
+export type AddressElement = ElementBase & {
   /**
    * Updates the options the `AddressElement` was initialized with.
    * Updates are merged into the existing configuration.
    */
-  update(options: Partial<Get1Point6AddressElementOptions>): Get1Point6AddressElement;
+  update(options: Partial<AddressElementOptions>): AddressElement;
 
   /**
    * Validates and retrieves form values from the `AddressElement`.
    */
   getValue(): Promise<
-    Pick<Get1Point6AddressElementChangeEvent, "complete" | "isNewAddress" | "value">
+    Pick<AddressElementChangeEvent, "complete" | "isNewAddress" | "value">
   >;
 };
 
@@ -31,7 +30,7 @@ export interface ContactOption {
 
 export type AddressMode = "shipping" | "billing";
 
-export interface Get1Point6AddressElementOptions {
+export interface AddressElementOptions {
   /**
    * Control which mode the AddressElement will be used for.
    */
@@ -103,7 +102,7 @@ export interface Get1Point6AddressElementOptions {
   };
 }
 
-export interface Get1Point6AddressElementChangeEvent {
+export interface AddressElementChangeEvent {
   /**
    * The type of element that emitted this event.
    */

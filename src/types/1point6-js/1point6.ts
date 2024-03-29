@@ -1,9 +1,8 @@
 import { CheckoutLocale, RedirectToCheckoutOptions } from "./checkout";
 import * as paymentIntents from "./payment-intents";
 import {
-  Get1Point6ElementsOptionsClientSecret,
-  Get1Point6ElementsOptionsMode,
-  Get1Point6Elements,
+  ElementsOptionsClientSecret,
+  Elements,
 } from "./elements-group";
 
 export interface Get1Point6 {
@@ -18,14 +17,14 @@ export interface Get1Point6 {
    *
    * TODO: ADD DOC
    */
-  elements(options?: Get1Point6ElementsOptionsClientSecret): Get1Point6Elements;
+  elements(options?: ElementsOptionsClientSecret): Elements;
 
   /**
    * Create an `Elements` instance, which manages a group of elements.
    *
    * TODO: ADD DOC
    */
-  elements(options?: Get1Point6ElementsOptionsMode): Get1Point6Elements;
+  elements(options?: any): Elements;
 
   /////////////////////////////
   /// Checkout
@@ -34,7 +33,7 @@ export interface Get1Point6 {
   /////////////////////////////
 
   /**
-   * Use `_1Point6.redirectToCheckout` to redirect your customers to [Checkout](TODO: ADD DOC), a Get1Point6-hosted page to securely collect payment information.
+   * Use `get1Point6.redirectToCheckout` to redirect your customers to [Checkout](TODO: ADD DOC), a 1Point6-hosted page to securely collect payment information.
    * When the customer completes their purchase, they are redirected back to your website.
    */
   redirectToCheckout(
@@ -42,24 +41,24 @@ export interface Get1Point6 {
   ): Promise<never | { error: Get1Point6Error }>;
 
   /**
-   * Use `_1Point6.confirmPayment` to confirm a PaymentIntent using data collected by the Payment Element.
-   * When called, `_1Point6.confirmPayment` will attempt to complete any required actions, such as authenticating your user by displaying a 3DS dialog or redirecting them to a bank authorization page.
+   * Use `get1Point6.confirmPayment` to confirm a PaymentIntent using data collected by the Payment Element.
+   * When called, `get1Point6.confirmPayment` will attempt to complete any required actions, such as authenticating your user by displaying a 3DS dialog or redirecting them to a bank authorization page.
    * Your user will be redirected to the return_url you pass once the confirmation is complete.
    *
-   * By default, `_1Point6.confirmPayment` will always redirect to your return_url after a successful confirmation.
-   * If you set `redirect: "if_required"`, then `_1Point6.confirmPayment` will only redirect if your user chooses a redirect-based payment method.
+   * By default, `get1Point6.confirmPayment` will always redirect to your return_url after a successful confirmation.
+   * If you set `redirect: "if_required"`, then `get1Point6.confirmPayment` will only redirect if your user chooses a redirect-based payment method.
    * Setting `if_required` requires that you handle successful confirmations for redirect-based and non-redirect based payment methods separately.
    *
    * @docs TODO: DOC HERE
    */
   confirmPayment(options: {
-    elements: Get1Point6Elements;
+    elements: Elements;
     confirmParams?: Partial<paymentIntents.ConfirmPaymentData>;
     redirect: "if_required";
   }): Promise<PaymentIntentResult>;
 }
 
-export interface Get1Point6ConstructorOptions {
+export interface ConstructorOptions {
   /**
    * The [IETF language tag](https://en.wikipedia.org/wiki/IETF_language_tag) used to globally configure localization in 1Point6.js.
    * Setting the locale here will localize error strings for all 1Point6.js methods.
@@ -71,7 +70,7 @@ export interface Get1Point6ConstructorOptions {
   locale?: CheckoutLocale;
 }
 
-export interface Get1Point6Constructor {
+export interface Constructor {
   (
     /**
      * Your publishable key.
@@ -84,7 +83,7 @@ export interface Get1Point6Constructor {
     /**
      * Initialization options.
      */
-    options?: Get1Point6ConstructorOptions
+    options?: ConstructorOptions
   ): Get1Point6;
 }
 
@@ -179,5 +178,5 @@ export interface Get1Point6Error {
 }
 
 export type PaymentIntentResult =
-  | { paymentIntent: api.PaymentIntent; error?: undefined }
+  | { paymentIntent: any; error?: undefined }
   | { paymentIntent?: undefined; error: Get1Point6Error };

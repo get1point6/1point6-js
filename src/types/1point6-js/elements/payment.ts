@@ -1,8 +1,8 @@
-import { Get1Point6ElementBase } from "./base";
+import { ElementBase } from "./base";
 
-export type Get1Point6PaymentElement = Get1Point6ElementBase & {};
+export type PaymentElement = ElementBase & {};
 
-export interface Get1Point6PaymentElementOptions {
+export interface PaymentElementOptions {
   /**
    * Provide initial customer information that will be displayed in the Payment Element.
    */
@@ -17,7 +17,7 @@ export interface Get1Point6PaymentElementOptions {
   /**
    * Control which fields are displayed in the Payment Element.
    */
-  fields?: FieldsOption;
+  fields?: any;
 
   /**
    * Apply a read-only state to the Payment Element so that payment details can’t be changed.
@@ -42,7 +42,7 @@ export interface DefaultValuesOption {
   };
 }
 
-export interface Get1Point6PaymentElementChangeEvent {
+export interface PaymentElementChangeEvent {
   /**
    * The type of element that emitted this event.
    */

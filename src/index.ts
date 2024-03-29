@@ -1,4 +1,5 @@
 import { loadScript, init1Point6, Load1Point6, LoadParams } from "./shared";
+export * from './types'
 
 let loadScriptArgs: LoadParams | null = null;
 

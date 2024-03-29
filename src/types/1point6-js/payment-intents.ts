@@ -1,10 +1,9 @@
-import { CardElement } from "./elements";
 
 /**
- * Data to be sent with a `panto.confirmPayment` request.
+ * Data to be sent with a `get1Point6.confirmPayment` request.
  * Refer to the Payment Intents API for a full list of parameters.
  */
-export interface ConfirmPaymentData extends PaymentIntentConfirmParams {
+export interface ConfirmPaymentData {
   /**
    * The url your customer will be directed to after they complete payment.
    */
@@ -22,7 +21,7 @@ export interface ConfirmPaymentData extends PaymentIntentConfirmParams {
      *
      * @docs // TODO: DOC HERE
      */
-    billing_details?: PaymentMethodCreateParams.BillingDetails;
+    billing_details?: any;
   };
 
   /**
