@@ -68,6 +68,7 @@ export interface ConstructorOptions {
    * If you are planning on using Checkout, make sure to use a [value](#checkout_redirect_to_checkout-options-locale) that it supports.
    */
   locale?: CheckoutLocale;
+  scriptSrc?: string,
 }
 
 export interface Constructor {
@@ -76,10 +77,7 @@ export interface Constructor {
      * Your publishable key.
      */
     publishableKey: string,
-    /**
-     * Targetted environment.
-     */
-    env?: "local" | "development" | "sandbox" | "production",
+    
     /**
      * Initialization options.
      */

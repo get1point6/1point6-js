@@ -1,7 +1,8 @@
 import { Get1Point6, Constructor } from "./types/1point6-js/1point6";
 
 interface CustomWindow extends Window {
-  Get1Point6: Constructor;
+  Get1Point6?: Constructor;
+  Panto?: Constructor;
 }
 
 export type Load1Point6 = (
@@ -9,7 +10,7 @@ export type Load1Point6 = (
 ) => Promise<Get1Point6 | null>;
 
 export interface LoadParams {
-  env?: "local" | "staging" | "sandbox" | "production" | "development";
+  scriptSrc?: string;
 }
 
 const GET1POINT6_URL_REGEX =
@@ -52,12 +53,17 @@ export const loadScript = (
       return;
     }
 
-    if ((window as unknown as CustomWindow).Get1Point6 && params) {
+    const customWindow:CustomWindow = (window as unknown as CustomWindow)
+
+    if (customWindow.Get1Point6 && params) {
       console.warn(EXISTING_SCRIPT_MESSAGE);
     }
 
-    if ((window as unknown as CustomWindow)?.Get1Point6) {
-      resolve((window as unknown as CustomWindow).Get1Point6);
+    if (customWindow.Get1Point6) {
+      resolve(customWindow.Get1Point6);
+      return;
+    } else if (customWindow.Panto) {
+      resolve(customWindow.Panto);
       return;
     }
 
@@ -71,9 +77,13 @@ export const loadScript = (
       }
 
       script.addEventListener("load", () => {
-        if ((window as unknown as CustomWindow).Get1Point6) {
+        
+        if (customWindow.Get1Point6) {
           console.log("1Point6.js succesfully loaded.");
-          resolve((window as unknown as CustomWindow).Get1Point6);
+          resolve(customWindow.Get1Point6);
+        } else if(customWindow.Panto) {
+          console.log("panto.js succesfully loaded.");
+          resolve(customWindow.Panto);
         } else {
           reject(new Error("1Point6.js not available"));
         }
@@ -106,28 +116,8 @@ export const init1Point6 = (
 
 const injectScript = (params: null | LoadParams): HTMLScriptElement => {
   const script = document.createElement("script");
-  let scriptSrc = GET1POINT6_URL;
-  switch (params?.env) {
-    case "local":
-      scriptSrc = "http://localhost:3004/";
-      break;
-    case "development":
-      scriptSrc = "https://js.getpanto.xyz/";
-      break;
-    case "sandbox":
-      scriptSrc = `https://js.getpanto.site/`;
-      break;
-    case "production":
-      scriptSrc = "https://js.get1point6.com/";
-      break;
-    case "staging":
-    default:
-      scriptSrc = "https://js.getpanto.xyz/";
-      break;
-  }
-
+  let scriptSrc = params?.scriptSrc ?? GET1POINT6_URL;
   script.src = `${scriptSrc}`;
-  console;
   const headOrBody = document.head || document.body;
 
   if (!headOrBody) {

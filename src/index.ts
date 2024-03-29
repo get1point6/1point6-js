@@ -13,7 +13,7 @@ export const load1Point6: Load1Point6 = (...args) => {
       console.warn(err);
     }
   });
-  loadScriptArgs = { env: args[1] };
+  loadScriptArgs = { scriptSrc:args[1]?.scriptSrc };
   loadCalled = true;
   const startTime = Date.now();
   return loadPromise.then((maybe1Point6) =>
