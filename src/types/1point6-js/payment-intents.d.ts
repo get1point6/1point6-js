@@ -1,4 +1,4 @@
-import { PantoCardElement } from "./elements";
+import { CardElement } from "./elements";
 
 /**
  * Data to be sent with a `panto.confirmPayment` request.

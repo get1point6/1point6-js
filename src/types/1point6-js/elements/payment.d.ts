@@ -1,8 +1,8 @@
-import { PantoElementBase } from "./base";
+import { Get1Point6ElementBase } from "./base";
 
-export type PantoPaymentElement = PantoElementBase & {};
+export type Get1Point6PaymentElement = Get1Point6ElementBase & {};
 
-export interface PantoPaymentElementOptions {
+export interface Get1Point6PaymentElementOptions {
   /**
    * Provide initial customer information that will be displayed in the Payment Element.
    */
@@ -10,7 +10,7 @@ export interface PantoPaymentElementOptions {
 
   /**
    * Override the business name displayed in the Payment Element.
-   * By default the PaymentElement will use your Panto account or business name.
+   * By default the PaymentElement will use your 1point6 account or business name.
    */
   business?: { name: string };
 
@@ -42,7 +42,7 @@ export interface DefaultValuesOption {
   };
 }
 
-export interface PantoPaymentElementChangeEvent {
+export interface Get1Point6PaymentElementChangeEvent {
   /**
    * The type of element that emitted this event.
    */

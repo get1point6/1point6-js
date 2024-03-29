@@ -1,13 +1,13 @@
-import { loadScript, initPanto, LoadPanto, LoadParams } from "./shared";
+import { loadScript, init1Point6, Load1Point6, LoadParams } from "./shared";
 
 let loadScriptArgs: LoadParams | null = null;
 
-export const loadPanto: LoadPanto = (...args) => {
-  const pantoPromise = Promise.resolve().then(() => loadScript(loadScriptArgs));
+export const load1Point6: Load1Point6 = (...args) => {
+  const loadPromise = Promise.resolve().then(() => loadScript(loadScriptArgs));
 
   let loadCalled = false;
 
-  pantoPromise.catch((err: Error) => {
+  loadPromise.catch((err: Error) => {
     if (!loadCalled) {
       console.warn(err);
     }
@@ -15,7 +15,7 @@ export const loadPanto: LoadPanto = (...args) => {
   loadScriptArgs = { env: args[1] };
   loadCalled = true;
   const startTime = Date.now();
-  return pantoPromise.then((maybePanto) =>
-    initPanto(maybePanto, args, startTime)
+  return loadPromise.then((maybe1Point6) =>
+    init1Point6(maybe1Point6, args, startTime)
   );
 };

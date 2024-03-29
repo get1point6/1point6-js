@@ -1,12 +1,12 @@
-import { Panto, PantoConstructor } from "./types/panto-js/panto";
+import { Get1Point6, Get1Point6Constructor } from "./types/1point6-js/1point6";
 
 interface CustomWindow extends Window {
-  Panto: PantoConstructor;
+  Get1Point6: Get1Point6Constructor;
 }
 
-export type LoadPanto = (
-  ...args: Parameters<PantoConstructor>
-) => Promise<Panto | null>;
+export type Load1Point6 = (
+  ...args: Parameters<Get1Point6Constructor>
+) => Promise<Get1Point6 | null>;
 
 export interface LoadParams {
   env?: "local" | "staging" | "sandbox" | "production" | "development";
@@ -18,7 +18,7 @@ const PANTO_URL = "https://js.getpanto.io";
 declare const _VERSION: string;
 
 const EXISTING_SCRIPT_MESSAGE =
-  "loadPanto.setLoadParameters was called but an existing Panto.js script already exists in the document; existing script parameters will be used";
+  "load1Point6.setLoadParameters was called but an existing 1Point6.js script already exists in the document; existing script parameters will be used";
 
 export const findScript = (): HTMLScriptElement | null => {
   const scripts = document.querySelectorAll<HTMLScriptElement>(`script`);
@@ -34,17 +34,17 @@ export const findScript = (): HTMLScriptElement | null => {
   return null;
 };
 
-let pantoPromise: Promise<PantoConstructor | null> | null = null;
+let promise: Promise<Get1Point6Constructor | null> | null = null;
 
 export const loadScript = (
   params: null | LoadParams
-): Promise<PantoConstructor | null> => {
-  // Ensure that we only attempt to load Panto.js at most once
-  if (pantoPromise !== null) {
-    return pantoPromise;
+): Promise<Get1Point6Constructor | null> => {
+  // Ensure that we only attempt to load 1point6.js at most once
+  if (promise !== null) {
+    return promise;
   }
 
-  pantoPromise = new Promise((resolve, reject) => {
+  promise = new Promise((resolve, reject) => {
     if (typeof window === "undefined" || typeof document === "undefined") {
       // Resolve to null when imported server side. This makes the module
       // safe to import in an isomorphic code base.
@@ -52,12 +52,12 @@ export const loadScript = (
       return;
     }
 
-    if ((window as unknown as CustomWindow).Panto && params) {
+    if ((window as unknown as CustomWindow).Get1Point6 && params) {
       console.warn(EXISTING_SCRIPT_MESSAGE);
     }
 
-    if ((window as unknown as CustomWindow)?.Panto) {
-      resolve((window as unknown as CustomWindow).Panto);
+    if ((window as unknown as CustomWindow)?.Get1Point6) {
+      resolve((window as unknown as CustomWindow).Get1Point6);
       return;
     }
 
@@ -71,16 +71,16 @@ export const loadScript = (
       }
 
       script.addEventListener("load", () => {
-        if ((window as unknown as CustomWindow).Panto) {
-          console.log("Panto.js succesfully loaded.");
-          resolve((window as unknown as CustomWindow).Panto);
+        if ((window as unknown as CustomWindow).Get1Point6) {
+          console.log("1Point6.js succesfully loaded.");
+          resolve((window as unknown as CustomWindow).Get1Point6);
         } else {
-          reject(new Error("Panto.js not available"));
+          reject(new Error("1Point6.js not available"));
         }
       });
 
       script.addEventListener("error", () => {
-        reject(new Error("Failed to load Panto.js"));
+        reject(new Error("Failed to load 1Point6.js"));
       });
     } catch (error) {
       reject(error);
@@ -88,20 +88,20 @@ export const loadScript = (
     }
   });
 
-  return pantoPromise;
+  return promise;
 };
 
-export const initPanto = (
-  maybePanto: PantoConstructor | null,
-  args: Parameters<PantoConstructor>,
+export const init1Point6 = (
+  maybe1Point6: Get1Point6Constructor | null,
+  args: Parameters<Get1Point6Constructor>,
   startTime: number
-): Panto | null => {
-  if (maybePanto === null) {
+): Get1Point6 | null => {
+  if (maybe1Point6 === null) {
     return null;
   }
-  const panto = maybePanto.apply(undefined, args);
-  registerWrapper(panto, startTime);
-  return panto;
+  const _1Point6 = maybe1Point6.apply(undefined, args);
+  registerWrapper(_1Point6, startTime);
+  return _1Point6;
 };
 
 const injectScript = (params: null | LoadParams): HTMLScriptElement => {
@@ -132,7 +132,7 @@ const injectScript = (params: null | LoadParams): HTMLScriptElement => {
 
   if (!headOrBody) {
     throw new Error(
-      "Expected document.body not to be null. Panto.js requires a <body> element."
+      "Expected document.body not to be null. 1Point6.js requires a <body> element."
     );
   }
 
@@ -141,10 +141,10 @@ const injectScript = (params: null | LoadParams): HTMLScriptElement => {
   return script;
 };
 
-const registerWrapper = (panto: any, startTime: number): void => {
-  if (!panto || !panto._registerWrapper) {
+const registerWrapper = (_1Point6: any, startTime: number): void => {
+  if (!_1Point6 || !_1Point6._registerWrapper) {
     return;
   }
 
-  panto._registerWrapper({ name: "panto-js", version: _VERSION, startTime });
+  _1Point6._registerWrapper({ name: "1Point6-js", version: _VERSION, startTime });
 };

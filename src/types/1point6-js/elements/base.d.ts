@@ -1,4 +1,4 @@
-export type PantoElementBase = {
+export type Get1Point6ElementBase = {
   /**
    * The `element.mount` method attaches your [Element](//TODO: ADD LINK TO DOC) to the DOM.
    * `element.mount` accepts either a CSS Selector (e.g., `'#card-element'`) or a DOM element.
