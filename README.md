@@ -122,7 +122,7 @@ $items = [
 This code creates a Payment Element and mounts it on the DOM:
 
 ```jsx
-const _1point6 = await load1Point6("your public key");
+const get1Point6 = await load1Point6("your public key");
 
 const appearance = {
   /* appearance */
@@ -130,7 +130,7 @@ const appearance = {
 const options = {
   /* options */
 };
-const elements = _1point6.elements({ clientSecret, appearance }); // Replace clientSecret with your secret returned by the previously created paymentIntent
+const elements = get1Point6.elements({ clientSecret, appearance }); // Replace clientSecret with your secret returned by the previously created paymentIntent
 const paymentElement = await elements.create("payment", options);
 paymentElement.mount("#payment-element");
 ```
@@ -144,7 +144,7 @@ For example, choose the "flat" theme and replace the main text color.
 ```
 
 jsx
-const _1point6 = await load1Point6('your public key');
+const get1Point6 = await load1Point6('your public key');
 
 const appearance = {
   theme: '1point6',
@@ -155,7 +155,7 @@ const appearance = {
     },
 };
 const options = { /* options */ };
-const elements = _1point6.elements({ clientSecret, appearance }); // Replace clientSecret with your secret returned by the previously created paymentIntent
+const elements = get1Point6.elements({ clientSecret, appearance }); // Replace clientSecret with your secret returned by the previously created paymentIntent
 const paymentElement = await elements.create('payment', options);
 paymentElement.mount('#payment-element');
 ```
@@ -170,7 +170,7 @@ document
         .addEventListener("submit", handleSubmit);
 
       async function handleSubmit(e: any) {
-        const { error } = await _1point6.confirmPayment({
+        const { error } = await get1Point6.confirmPayment({
           elements,
           confirmParams: {
             return_url: `https://www.my-shop.com/order/success`,

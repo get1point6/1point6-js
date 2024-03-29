@@ -23,14 +23,14 @@ export default defineConfig(async ({ command, mode }) => {
     build: {
       lib: {
         entry: resolve(__dirname, "src/index.ts"),
-        name: "_1Point6",
+        name: "Get1Point6",
         formats: ["es"],
         fileName: (format) => `1point6.${format}.js`,
       },
       rollupOptions: {
         output: {
           globals: {
-            _1Point6: "_1Point6",
+            Get1Point6: "Get1Point6",
           },
         },
       },
