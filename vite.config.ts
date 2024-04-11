@@ -1,11 +1,17 @@
 import { defineConfig, loadEnv } from "vite";
 import { resolve } from "path";
 import path from "path";
+import dts from "vite-plugin-dts";
 
 export default defineConfig(async ({ command, mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
 
   return {
+    plugins:[
+      dts({
+        insertTypesEntry: true,
+      }),
+    ],
     resolve: {
       alias: {
         "@": path.resolve(__dirname, "./src"),
@@ -17,14 +23,14 @@ export default defineConfig(async ({ command, mode }) => {
     build: {
       lib: {
         entry: resolve(__dirname, "src/index.ts"),
-        name: "Panto",
+        name: "Get1Point6",
         formats: ["es"],
-        fileName: (format) => `panto.${format}.js`,
+        fileName: (format) => `1point6.${format}.js`,
       },
       rollupOptions: {
         output: {
           globals: {
-            Panto: "Panto",
+            Get1Point6: "Get1Point6",
           },
         },
       },

@@ -1,12 +1,11 @@
 import { CheckoutLocale, RedirectToCheckoutOptions } from "./checkout";
 import * as paymentIntents from "./payment-intents";
 import {
-  PantoElementsOptionsClientSecret,
-  PantoElementsOptionsMode,
-  PantoElements,
+  ElementsOptionsClientSecret,
+  Elements,
 } from "./elements-group";
 
-export interface Panto {
+export interface Get1Point6 {
   /////////////////////////////
   /// Elements
   ///
@@ -18,14 +17,14 @@ export interface Panto {
    *
    * TODO: ADD DOC
    */
-  elements(options?: PantoElementsOptionsClientSecret): PantoElements;
+  elements(options?: ElementsOptionsClientSecret): Elements;
 
   /**
    * Create an `Elements` instance, which manages a group of elements.
    *
    * TODO: ADD DOC
    */
-  elements(options?: PantoElementsOptionsMode): PantoElements;
+  elements(options?: any): Elements;
 
   /////////////////////////////
   /// Checkout
@@ -34,68 +33,66 @@ export interface Panto {
   /////////////////////////////
 
   /**
-   * Use `panto.redirectToCheckout` to redirect your customers to [Checkout](TODO: ADD DOC), a Panto-hosted page to securely collect payment information.
+   * Use `get1Point6.redirectToCheckout` to redirect your customers to [Checkout](TODO: ADD DOC), a 1Point6-hosted page to securely collect payment information.
    * When the customer completes their purchase, they are redirected back to your website.
    */
   redirectToCheckout(
     options: RedirectToCheckoutOptions
-  ): Promise<never | { error: PantoError }>;
+  ): Promise<never | { error: Get1Point6Error }>;
 
   /**
-   * Use `panto.confirmPayment` to confirm a PaymentIntent using data collected by the Payment Element.
-   * When called, `panto.confirmPayment` will attempt to complete any required actions, such as authenticating your user by displaying a 3DS dialog or redirecting them to a bank authorization page.
+   * Use `get1Point6.confirmPayment` to confirm a PaymentIntent using data collected by the Payment Element.
+   * When called, `get1Point6.confirmPayment` will attempt to complete any required actions, such as authenticating your user by displaying a 3DS dialog or redirecting them to a bank authorization page.
    * Your user will be redirected to the return_url you pass once the confirmation is complete.
    *
-   * By default, `panto.confirmPayment` will always redirect to your return_url after a successful confirmation.
-   * If you set `redirect: "if_required"`, then `panto.confirmPayment` will only redirect if your user chooses a redirect-based payment method.
+   * By default, `get1Point6.confirmPayment` will always redirect to your return_url after a successful confirmation.
+   * If you set `redirect: "if_required"`, then `get1Point6.confirmPayment` will only redirect if your user chooses a redirect-based payment method.
    * Setting `if_required` requires that you handle successful confirmations for redirect-based and non-redirect based payment methods separately.
    *
    * @docs TODO: DOC HERE
    */
   confirmPayment(options: {
-    elements: PantoElements;
+    elements: Elements;
     confirmParams?: Partial<paymentIntents.ConfirmPaymentData>;
     redirect: "if_required";
   }): Promise<PaymentIntentResult>;
 }
 
-export interface PantoConstructorOptions {
+export interface ConstructorOptions {
   /**
-   * The [IETF language tag](https://en.wikipedia.org/wiki/IETF_language_tag) used to globally configure localization in Panto.js.
-   * Setting the locale here will localize error strings for all Panto.js methods.
+   * The [IETF language tag](https://en.wikipedia.org/wiki/IETF_language_tag) used to globally configure localization in 1Point6.js.
+   * Setting the locale here will localize error strings for all 1Point6.js methods.
    *
    * Supported values depend on which features you are using.
-   * Checkout supports a slightly different set of locales than the rest of Panto.js.
+   * Checkout supports a slightly different set of locales than the rest of 1Point6.js.
    * If you are planning on using Checkout, make sure to use a [value](#checkout_redirect_to_checkout-options-locale) that it supports.
    */
   locale?: CheckoutLocale;
+  scriptSrc?: string,
 }
 
-export interface PantoConstructor {
+export interface Constructor {
   (
     /**
      * Your publishable key.
      */
     publishableKey: string,
-    /**
-     * Targetted environment.
-     */
-    env?: "local" | "development" | "sandbox" | "production",
+    
     /**
      * Initialization options.
      */
-    options?: PantoConstructorOptions
-  ): Panto;
+    options?: ConstructorOptions
+  ): Get1Point6;
 }
 
-export type PantoErrorType =
+export type Get1Point6ErrorType =
   /**
-   * Failure to connect to Panto's API.
+   * Failure to connect to 1Point6's API.
    */
   | "api_connection_error"
 
   /**
-   * API errors cover any other type of problem (e.g., a temporary problem with Panto's servers), and are extremely uncommon.
+   * API errors cover any other type of problem (e.g., a temporary problem with 1Point6's servers), and are extremely uncommon.
    */
   | "api_error"
 
@@ -130,11 +127,11 @@ export type PantoErrorType =
    */
   | "validation_error";
 
-export interface PantoError {
+export interface Get1Point6Error {
   /**
    * The type of error.
    */
-  type: PantoErrorType;
+  type: Get1Point6ErrorType;
 
   /**
    * For card errors, the ID of the failed charge
@@ -179,5 +176,5 @@ export interface PantoError {
 }
 
 export type PaymentIntentResult =
-  | { paymentIntent: api.PaymentIntent; error?: undefined }
-  | { paymentIntent?: undefined; error: PantoError };
+  | { paymentIntent: any; error?: undefined }
+  | { paymentIntent?: undefined; error: Get1Point6Error };

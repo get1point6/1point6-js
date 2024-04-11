@@ -1,18 +1,17 @@
-import { PantoElementBase } from "./base";
-import { PantoError } from "../panto";
+import { ElementBase } from "./base";
 
-export type PantoAddressElement = PantoElementBase & {
+export type AddressElement = ElementBase & {
   /**
    * Updates the options the `AddressElement` was initialized with.
    * Updates are merged into the existing configuration.
    */
-  update(options: Partial<PantoAddressElementOptions>): PantoAddressElement;
+  update(options: Partial<AddressElementOptions>): AddressElement;
 
   /**
    * Validates and retrieves form values from the `AddressElement`.
    */
   getValue(): Promise<
-    Pick<PantoAddressElementChangeEvent, "complete" | "isNewAddress" | "value">
+    Pick<AddressElementChangeEvent, "complete" | "isNewAddress" | "value">
   >;
 };
 
@@ -31,7 +30,7 @@ export interface ContactOption {
 
 export type AddressMode = "shipping" | "billing";
 
-export interface PantoAddressElementOptions {
+export interface AddressElementOptions {
   /**
    * Control which mode the AddressElement will be used for.
    */
@@ -103,7 +102,7 @@ export interface PantoAddressElementOptions {
   };
 }
 
-export interface PantoAddressElementChangeEvent {
+export interface AddressElementChangeEvent {
   /**
    * The type of element that emitted this event.
    */

@@ -1,22 +1,22 @@
 {
-  "name": "@panto/panto-js",
-  "version": "1.0.6",
-  "description": "Panto.js loading wrapper",
+  "name": "@1point6/1point6-js",
+  "version": "1.0.1",
+  "description": "1point6.js loading wrapper",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/getpanto/panto-js.git"
+    "url": "git+https://github.com/get1point6/1point6-js.git"
   },
   "type": "module",
-  "types": "types/index.d.ts",
-  "typings": "types/index.d.ts",
+  "types": "dist/index.d.ts",
+  "typings": "dist/index.d.ts",
   "keywords": [
-    "panto",
-    "pantojs",
-    "panto.js",
-    "panto.js loading wrapper"
+    "1point6",
+    "1point6js",
+    "1point6.js",
+    "1point6.js loading wrapper"
   ],
-  "author": "Panto (https://getpanto.io/)",
-  "main": "dist/panto.es.js",
+  "author": "1Point6 (https://get1point6.io/)",
+  "main": "dist/1point6.es.js",
   "scripts": {
     "start:dev": "nodemon --watch /src --exec 'tsc && vite build'",
     "build": "tsc && vite build"
@@ -25,11 +25,14 @@
     "@types/node": "^20.8.5",
     "nodemon": "^3.0.1",
     "typescript": "^5.0.2",
-    "vite": "^4.3.9"
+    "vite": "^4.3.9",
+    "vite-plugin-dts": "^3.8.1"
   },
   "bugs": {
-    "url": "https://github.com/getpanto/panto-js/issues"
+    "url": "https://github.com/get1point6/1point6-js/issues"
   },
-  "homepage": "https://github.com/getpanto/panto-js#readme",
-  "license": "MIT"
+  "homepage": "https://github.com/get1point6/1point6-js#readme",
+  "license": "MIT",
+  "private": false,
+  "files": ["dist"]
 }

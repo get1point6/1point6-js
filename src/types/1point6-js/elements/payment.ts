@@ -1,8 +1,8 @@
-import { PantoElementBase } from "./base";
+import { ElementBase } from "./base";
 
-export type PantoPaymentElement = PantoElementBase & {};
+export type PaymentElement = ElementBase & {};
 
-export interface PantoPaymentElementOptions {
+export interface PaymentElementOptions {
   /**
    * Provide initial customer information that will be displayed in the Payment Element.
    */
@@ -10,14 +10,14 @@ export interface PantoPaymentElementOptions {
 
   /**
    * Override the business name displayed in the Payment Element.
-   * By default the PaymentElement will use your Panto account or business name.
+   * By default the PaymentElement will use your 1point6 account or business name.
    */
   business?: { name: string };
 
   /**
    * Control which fields are displayed in the Payment Element.
    */
-  fields?: FieldsOption;
+  fields?: any;
 
   /**
    * Apply a read-only state to the Payment Element so that payment details can’t be changed.
@@ -42,7 +42,7 @@ export interface DefaultValuesOption {
   };
 }
 
-export interface PantoPaymentElementChangeEvent {
+export interface PaymentElementChangeEvent {
   /**
    * The type of element that emitted this event.
    */

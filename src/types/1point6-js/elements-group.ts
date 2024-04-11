@@ -1,12 +1,11 @@
 import {
-  PantoPaymentElement,
-  PantoPaymentElementOptions,
-  PantoAddressElement,
-  PantoAddressElementOptions,
+  PaymentElement,
+  PaymentElementOptions,
+  AddressElement,
+  AddressElementOptions,
 } from "./elements";
 
-import { PantoError } from "./panto";
-export interface PantoElements {
+export interface Elements {
   /////////////////////////////
   /// payment
   /////////////////////////////
@@ -18,13 +17,13 @@ export interface PantoElements {
    */
   create(
     elementType: "payment",
-    options?: PantoPaymentElementOptions
-  ): Promise<PantoPaymentElement>;
+    options?: PaymentElementOptions
+  ): Promise<PaymentElement>;
 
   /**
    * Looks up a previously created `Element` by its type.
    */
-  // getElement(elementType: "payment"): PantoPaymentElement | null;
+  // getElement(elementType: "payment"): PaymentElement | null;
 
   /////////////////////////////
   /// address
@@ -35,17 +34,17 @@ export interface PantoElements {
    */
   create(
     elementType: "address",
-    options: PantoAddressElementOptions
-  ): Promise<PantoAddressElement>;
+    options: AddressElementOptions
+  ): Promise<AddressElement>;
 
   /**
    * Looks up a previously created `Element` by its type.
    */
-  // getElement(elementType: "address"): PantoAddressElement | null;
+  // getElement(elementType: "address"): AddressElement | null;
 }
 
-export interface PantoElementsOptionsClientSecret
-  extends BasePantoElementsOptions {
+export interface ElementsOptionsClientSecret
+  extends BaseElementsOptions {
   /**
    * The client secret for a PaymentIntent or SetupIntent used by the Payment Element.
    *
@@ -59,7 +58,7 @@ export interface PantoElementsOptionsClientSecret
   mode?: never;
 }
 
-export type PantoElementLocale =
+export type ElementLocale =
   | "auto"
   | "ar"
   | "bg"
@@ -114,18 +113,18 @@ export type PantoElementLocale =
 /**
  * Options to create an `Elements` instance with.
  */
-export interface BasePantoElementsOptions {
+export interface BaseElementsOptions {
   /**
    * An array of custom fonts, which elements created from the `Elements` object can use.
    */
-  fonts?: Array<CssFontSource | CustomFontSource>;
+  fonts?: Array<any>;
 
   /**
    * The [IETF language tag](https://en.wikipedia.org/wiki/IETF_language_tag) of the locale to display placeholders and error strings in.
-   * Default is `auto` (Panto detects the locale of the browser).
+   * Default is `auto` (1point6-js detects the locale of the browser).
    * Setting the locale does not affect the behavior of postal code validation—a valid postal code for the billing country of the card is still required.
    */
-  locale?: PantoElementLocale;
+  locale?: ElementLocale;
   /**
    * Match the Payment Element with the design of your site with the appearance option.
    * The layout of the Payment Element stays consistent, but you can modify colors, fonts, borders, padding, and more.
@@ -136,7 +135,7 @@ export interface BasePantoElementsOptions {
 }
 
 export interface Appearance {
-  theme?: "panto";
+  theme?: "1point6";
   variables?: {
     // General font styles
     fontFamily?: string;
