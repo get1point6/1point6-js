@@ -18,7 +18,7 @@ export interface Elements {
   create(
     elementType: "payment",
     options?: PaymentElementOptions
-  ): Promise<PaymentElement>;
+  ): Promise<Record<string, PaymentElement>>;
 
   /**
    * Looks up a previously created `Element` by its type.
@@ -43,8 +43,7 @@ export interface Elements {
   // getElement(elementType: "address"): AddressElement | null;
 }
 
-export interface ElementsOptionsClientSecret
-  extends BaseElementsOptions {
+export interface ElementsOptionsClientSecret extends BaseElementsOptions {
   /**
    * The client secret for a PaymentIntent or SetupIntent used by the Payment Element.
    *
